@@ -2,10 +2,8 @@ package com.andre.p_db;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -13,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+
 
 public class MainActivity extends Activity implements OnClickListener {
 	DBH dbh;
@@ -24,7 +24,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	TextView tv, tvm;
 	int ind1, ind2 = 0;
 	String[][] d;
-    int pos =1;
+    int pos =0;
     int maxpos=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		c = db.query("mytable", null, null, null, null, null, null);
 		c.moveToPosition(pos);
 		et.setText(c.getString(0) + " - " + c.getString(1));
-		tv.setText(String.valueOf(pos+1));
+		tv.setText(String.valueOf(pos));
 		maxpos = c.getCount();
 		tvm.setText(String.valueOf(maxpos));
 		c.close();
@@ -86,7 +86,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.btnr:
 			
-			if (pos<maxpos-1){
+			if (pos<maxpos){
 				pos++;
 				echo(pos);
 			}
@@ -105,7 +105,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		;
 	}
 }
-
+/*
 class DBH extends SQLiteOpenHelper {
 	public DBH(Context context) {
 		super(context, "myDB", null, 1);
@@ -123,4 +123,4 @@ class DBH extends SQLiteOpenHelper {
 
 	}
 
-}
+}*/
