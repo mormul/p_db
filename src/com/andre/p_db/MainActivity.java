@@ -17,16 +17,10 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements OnClickListener {
 	DBH dbh;
 	SQLiteDatabase db;
-	ContentValues cv;
-
 	Button btnl, btnr, btna, btnread;
 	EditText et;
 	TextView tv, tvm;
-	int ind1, ind2 = 0;
-	String[][] d;
-    int pos =0;
-    int maxpos=0;
-    
+	int pos =0;
     Cursor c;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +39,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		tvm = (TextView) findViewById(R.id.tvm);
 		dbh = new DBH(this);
 		
-		//db = dbh.getWritableDatabase();
-		//cv = new ContentValues();
         echo(pos);
         btna.setEnabled(false);
         btnread.setEnabled(false);
@@ -67,14 +59,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	    {
 	    	pos =0;
 	    }
-	    /*
-		c = db.query("mytable", null, null, null, null, null, null);
-		c.moveToPosition(pos);
-		et.setText(c.getString(0) + " - " + c.getString(1));
-		tv.setText(String.valueOf(pos));
-		maxpos = c.getCount();
-		tvm.setText(String.valueOf(maxpos));
-		c.close();*/
 		return true;
 	}
 	
@@ -122,12 +106,6 @@ public class MainActivity extends Activity implements OnClickListener {
 				tvm.setText(String.valueOf(pos));
 				
 			}
-			/*
-			if (pos<maxpos){
-				pos++;
-				echo(pos);
-			}*/
-			
 			break;
 		case R.id.btnl:
 			if ((c!=null)&& (pos>=1))
@@ -138,14 +116,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				et.setText(c.getString(1));
 				tvm.setText(String.valueOf(pos));
 			}
-			/*9
-			if (pos>0){
-				pos--;
-				echo(pos);
-			}
-			*/
 			break;
-
 		}
 		;
 	}
