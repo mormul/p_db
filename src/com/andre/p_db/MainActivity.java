@@ -26,6 +26,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	String[][] d;
     int pos =0;
     int maxpos=0;
+    
+    Cursor c;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,21 +44,45 @@ public class MainActivity extends Activity implements OnClickListener {
 		tv = (TextView) findViewById(R.id.tv1);
 		tvm = (TextView) findViewById(R.id.tvm);
 		dbh = new DBH(this);
-		db = dbh.getWritableDatabase();
-		cv = new ContentValues();
+		
+		//db = dbh.getWritableDatabase();
+		//cv = new ContentValues();
         echo(pos);
+        btna.setEnabled(false);
+        btnread.setEnabled(false);
 	}
 
 	public boolean echo(int pos) {
-		Cursor c;
+	    if ((c !=null) && (c.isClosed()==false)) c.close();
+	    c = dbh.getWritableDatabase().rawQuery("SELECT id, fraza FROM mytable ",null);
+	    if (c.getCount()>0)
+	    {
+	    	c.moveToFirst();
+	    	et.setText(c.getString(1));
+	    	tv.setText(c.getString(0));
+	    	tvm.setText(String.valueOf(pos));
+	    	pos =1;
+	    }
+	    else 
+	    {
+	    	pos =0;
+	    }
+	    /*
 		c = db.query("mytable", null, null, null, null, null, null);
 		c.moveToPosition(pos);
 		et.setText(c.getString(0) + " - " + c.getString(1));
 		tv.setText(String.valueOf(pos));
 		maxpos = c.getCount();
 		tvm.setText(String.valueOf(maxpos));
-		c.close();
+		c.close();*/
 		return true;
+	}
+	
+	
+	public void onDestroy()
+	{
+		if ((c !=null) && (c.isClosed()==false)) c.close();
+		if (db.isOpen()) db.close();
 	}
 
 	@Override
@@ -71,56 +97,56 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		switch (arg0.getId()) {
 		case R.id.btna:
-			cv.put("fraza", et.getText().toString());
-			db.insert("mytable", null, cv);
+			btna.setEnabled(false);
+			//cv.put("fraza", et.getText().toString());
+			//db.insert("mytable", null, cv);
 			break;
 		case R.id.button1:// read all data
-			Cursor c = db.query("mytable", null, null, null, null, null, null);
+			/*Cursor c = db.query("mytable", null, null, null, null, null, null);
 			if (c.moveToFirst()) {
 				do {
 					et.append(c.getString(0) + " - " + c.getString(1) + "\n");
 
 				} while (c.moveToNext());
 			}
-			c.close();
+			c.close();*/
+			
 			break;
 		case R.id.btnr:
-			
+			if ((c!=null)&&(c.getCount()>(pos+1))) 
+			{
+				pos++;
+				c.moveToNext();
+				tv.setText(c.getString(0));
+				et.setText(c.getString(1));
+				tvm.setText(String.valueOf(pos));
+				
+			}
+			/*
 			if (pos<maxpos){
 				pos++;
 				echo(pos);
-			}
+			}*/
 			
 			break;
 		case R.id.btnl:
-			
+			if ((c!=null)&& (pos>=1))
+			{
+				pos--;
+				c.moveToPrevious();
+				tv.setText(c.getString(0));
+				et.setText(c.getString(1));
+				tvm.setText(String.valueOf(pos));
+			}
+			/*9
 			if (pos>0){
 				pos--;
 				echo(pos);
 			}
-			
+			*/
 			break;
 
 		}
 		;
 	}
 }
-/*
-class DBH extends SQLiteOpenHelper {
-	public DBH(Context context) {
-		super(context, "myDB", null, 1);
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
-		db.execSQL("create table mytable (id integer primary key autoincrement, fraza text);");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-
-	}
-
-}*/
