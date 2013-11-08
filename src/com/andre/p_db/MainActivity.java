@@ -14,8 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements OnClickListener,
-		OnTouchListener {
+public class MainActivity extends Activity implements OnTouchListener {
 	DBH dbh;
 	SQLiteDatabase db;
 	Button btnl, btnr, btna;
@@ -36,14 +35,14 @@ public class MainActivity extends Activity implements OnClickListener,
 		btnr = (Button) findViewById(R.id.btnr);
 		btna = (Button) findViewById(R.id.btna);
 
-		btnl.setOnClickListener(this);
+		/*btnl.setOnClickListener(this);
 		btnr.setOnClickListener(this);
-		btna.setOnClickListener(this);
+		btna.setOnClickListener(this);*/
 		et = (EditText) findViewById(R.id.et1);
 		tv = (TextView) findViewById(R.id.tv1);
 		tvstatus = (TextView) findViewById(R.id.tvstatus);
 		dbh = new DBH(this);
-et.setOnTouchListener(this);
+		et.setOnTouchListener(this);
 		echo(pos);
 		btna.setEnabled(false);
 
@@ -103,7 +102,7 @@ et.setOnTouchListener(this);
 		}
 
 	}
-
+/*
 	@Override
 	public void onClick(View arg0) {
 
@@ -122,7 +121,7 @@ et.setOnTouchListener(this);
 		}
 		;
 	}
-
+*/
 	@Override
 	public boolean onTouch(View arg0, MotionEvent event) {
 		switch (event.getAction()) {
