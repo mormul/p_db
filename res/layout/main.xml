@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:id="@+id/mainid" >
 
     <TextView
         android:id="@+id/tv1"
@@ -10,11 +11,7 @@
         android:layout_height="wrap_content"
         android:text="ID" />
 
-    <TextView
-        android:id="@+id/tvm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+ 
 
     <EditText
         android:id="@+id/et1"
@@ -46,12 +43,14 @@
             android:layout_height="wrap_content"
             android:text="Записать" />
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Читать" />
+    
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </LinearLayout>
