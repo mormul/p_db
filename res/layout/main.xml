@@ -11,12 +11,6 @@
         android:layout_height="wrap_content"
         android:text="ID" />
 
-    <TextView
-        android:id="@+id/tvstatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
     <EditText
         android:id="@+id/et1"
         android:layout_width="fill_parent"
@@ -25,12 +19,10 @@
         android:inputType="none"
         android:text="" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-    
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tvstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </LinearLayout>

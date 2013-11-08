@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,22 +28,17 @@ public class MainActivity extends Activity implements OnTouchListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
 		mainid = (LinearLayout) findViewById(R.id.mainid);
 		mainid.setOnTouchListener(this);
-		btnl = (Button) findViewById(R.id.btnl);
-		btnr = (Button) findViewById(R.id.btnr);
-		btna = (Button) findViewById(R.id.btna);
-
-		/*btnl.setOnClickListener(this);
-		btnr.setOnClickListener(this);
-		btna.setOnClickListener(this);*/
 		et = (EditText) findViewById(R.id.et1);
+
 		tv = (TextView) findViewById(R.id.tv1);
 		tvstatus = (TextView) findViewById(R.id.tvstatus);
 		dbh = new DBH(this);
 		et.setOnTouchListener(this);
 		echo(pos);
-		btna.setEnabled(false);
+		
 
 	}
 
@@ -126,11 +120,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 	public boolean onTouch(View arg0, MotionEvent event) {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			tvstatus.setText("down  " + x + "  " + y);
+			//tvstatus.setText("down  " + x + "  " + y);
 			x = event.getX();
 			break;
 		case MotionEvent.ACTION_MOVE:
-			tvstatus.setText("move  " + x + "  " + y);
+			//tvstatus.setText("move  " + x + "  " + y);
 			break;
 		case MotionEvent.ACTION_UP:
 			if (event.getX() < x) {
